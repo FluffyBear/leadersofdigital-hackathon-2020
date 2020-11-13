@@ -5,9 +5,12 @@ class Project {
         val finishJobDates = finishJobDates(graph)
         val rating = mutableMapOf<Int, Rating>()
         graph.jobs.forEach{
-            rating.put(it.id, Rating(it.startDate - ))
+            val dependentJobReadyDate = readyToStartDate(it, finishJobDates)
+            if (dependentJobReadyDate != null)
+                rating[it.id] = Rating(
+                    earlyGap = it.startDate - dependentJobReadyDate)
         }
-
+        return rating
     }
 
     fun fillGraph(graph: Graph) : Boolean {
@@ -37,8 +40,12 @@ class Project {
         return finishDates
     }
 
-    private fun readyToStartDate(job: Job): Int {
-
+    private fun readyToStartDate(job: Job, finishJobDates: Map<Int, Int>): Int? {
+        val dependentJobsReadyDates = mutableListOf<Int>()
+        job.dependentJobs.forEach{
+            dependentJobsReadyDates.add(finishJobDates[it] as Int)
+        }
+        return dependentJobsReadyDates.maxOrNull()
     }
 
 }
