@@ -12,5 +12,18 @@ class Job (
     val normalDuration: Int,
     val minimumDuration: Int,
     val costReduceDurationFromNormalToMinimum: Int,
-    val dependentJobs: List<Job>
-)
+    val dependentJobs: List<Int>
+) {
+    constructor(id: Int, name: String, startDate: Int, normalDuration: Int, dependentJobs: List<Int>) : this(
+        id = id,
+        name = name,
+        function = FunctionType(),
+        startDate = startDate,
+        costDateShiftEarly = 0,
+        costDateShiftLater = 0,
+        normalDuration = normalDuration,
+        minimumDuration = 0,
+        costReduceDurationFromNormalToMinimum = 0,
+        dependentJobs = dependentJobs
+    )
+}
