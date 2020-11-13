@@ -45,7 +45,7 @@ class Project {
         job.dependentJobs.forEach{
             dependentJobsReadyDates.add(finishJobDates[it] as Int)
         }
-        return dependentJobsReadyDates.maxOrNull()
+        return dependentJobsReadyDates.max()
     }
 
 }
