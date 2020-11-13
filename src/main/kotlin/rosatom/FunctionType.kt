@@ -1,0 +1,5 @@
+package rosatom
+
+class FunctionType {
+
+}
