@@ -8,7 +8,7 @@ leadersofdigital Хакатон 2020
 ```bash
 ./gradlew bootRun
 ```
-2. Все!!!
+2. Все!!! Можно попробовать разные тесты на странице http://localhost:8080/index.html
 
 ## Работа с проектом
 
