@@ -1,13 +1,14 @@
 package rosatom.web
 
+import com.google.common.io.Resources
 import mu.KLogging
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration
-import org.springframework.web.bind.annotation.GetMapping
-import org.springframework.web.bind.annotation.RequestMapping
-import org.springframework.web.bind.annotation.RestController
+import org.springframework.web.bind.annotation.*
+import rosatom.Project
+import rosatom.RatingDto
 import rosatom.web.dto.AnalyseRequestDto
-import rosatom.web.dto.AnalyseResponseDto
+import rosatom.web.dto.VisualDataDto
 
 @RestController
 @EnableAutoConfiguration
@@ -15,8 +16,20 @@ import rosatom.web.dto.AnalyseResponseDto
 class Controller @Autowired constructor() {
     companion object : KLogging()
 
-    @GetMapping("/analyse")
-    fun render(request: AnalyseRequestDto): AnalyseResponseDto {
-        return AnalyseResponseDto(0.0, emptyMap())
+    @PostMapping(path = ["/analyse"])
+    fun analyse(@RequestBody request: AnalyseRequestDto): RatingDto {
+        return Project(request).rating()
+    }
+
+    @GetMapping(path = ["/render"])
+    fun render(@RequestParam num: String): VisualDataDto {
+        val request = AnalyseRequestDto.parse(Resources.getResource("test/$num.json").readText())
+        return VisualDataDto(Project(request).jobs.associateBy { it.id })
+    }
+
+    @GetMapping(path = ["/render-analyse"])
+    fun renderAnalyse(@RequestParam num: String): VisualDataDto {
+        val request = AnalyseRequestDto.parse(Resources.getResource("test/$num.json").readText())
+        return Project(request).rating().criticalJobs
     }
 }

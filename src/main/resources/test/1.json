@@ -1,0 +1,22 @@
+{
+  "jobs": [
+    {
+      "id": 1,
+      "name": "1",
+      "normalDuration": 1,
+      "startDate": 1
+    },
+    {
+      "id": 2,
+      "name": "2",
+      "normalDuration": 3,
+      "startDate": 3
+    }
+  ],
+  "dependencies": [
+    {
+      "from": 1,
+      "to": 2
+    }
+  ]
+}

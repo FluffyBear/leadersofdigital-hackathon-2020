@@ -1,0 +1,86 @@
+{
+  "jobs": [
+    {
+      "id": 1,
+      "name": "1",
+      "normalDuration": 1,
+      "startDate": 1
+    },
+    {
+      "id": 2,
+      "name": "2",
+      "normalDuration": 2,
+      "startDate": 3
+    },
+    {
+      "id": 3,
+      "name": "3",
+      "normalDuration": 2,
+      "startDate": 6
+    },
+    {
+      "id": 4,
+      "name": "4",
+      "normalDuration": 2,
+      "startDate": 8
+    },
+    {
+      "id": 5,
+      "name": "5",
+      "normalDuration": 2,
+      "startDate": 11
+    },
+    {
+      "id": 6,
+      "name": "6",
+      "normalDuration": 2,
+      "startDate": 5
+    },
+    {
+      "id": 7,
+      "name": "7",
+      "normalDuration": 2,
+      "startDate": 6
+    },
+    {
+      "id": 8,
+      "name": "8",
+      "normalDuration": 2,
+      "startDate": 7
+    }
+  ],
+  "dependencies": [
+    {
+      "from": 1,
+      "to": 2
+    },
+    {
+      "from": 2,
+      "to": 3
+    },
+    {
+      "from": 3,
+      "to": 4
+    },
+    {
+      "from": 4,
+      "to": 5
+    },
+    {
+      "from": 1,
+      "to": 6
+    },
+    {
+      "from": 6,
+      "to": 7
+    },
+    {
+      "from": 7,
+      "to": 8
+    },
+    {
+      "from": 8,
+      "to": 5
+    }
+  ]
+}

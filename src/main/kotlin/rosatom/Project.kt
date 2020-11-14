@@ -1,51 +1,27 @@
 package rosatom
 
-class Project {
-    fun rating(graph: Graph) : Map<Int, Rating> {
-        val finishJobDates = finishJobDates(graph)
-        val rating = mutableMapOf<Int, Rating>()
-        graph.jobs.forEach{
-            val dependentJobReadyDate = readyToStartDate(it, finishJobDates)
-            if (dependentJobReadyDate != null)
-                rating[it.id] = Rating(
-                    earlyGap = it.startDate - dependentJobReadyDate)
+import rosatom.web.dto.AnalyseRequestDto
+import rosatom.web.dto.VisualDataDto
+
+data class Project(
+    val jobs: List<Job>,
+    val dependencies: List<Pair<Int, Int>>
+) {
+    constructor(request: AnalyseRequestDto) : this(
+        request.jobs.map { it.toJob() }, request.dependencies.map { it.from to it.to }
+    )
+
+    private val jobsMap = jobs.associateBy { it.id }
+
+    init {
+        dependencies.forEach { (from, to) ->
+            jobsMap.getValue(from).dependentJobs.add(jobsMap.getValue(to))
+            jobsMap.getValue(to).dependsOnJobs.add(jobsMap.getValue(from))
         }
-        return rating
     }
 
-    fun fillGraph(graph: Graph) : Boolean {
-        val finishJobDates = finishJobDates(graph)
-        graph.jobs.forEach{ job ->
-            val dependentJobFinishDates = mutableListOf<Int>()
-            job.dependentJobs.forEach{
-                dependentJobFinishDates.add(finishJobDates[it] as Int)
-            }
-            if (!isJobStartDateOk(job.startDate, dependentJobFinishDates)) return false
-        }
-        return true
-    }
-
-    private fun isJobStartDateOk(jobStartDate: Int, dependentJobFinishDates: List<Int>): Boolean {
-        dependentJobFinishDates.forEach{
-            if (it > jobStartDate) return false
-        }
-        return true
-    }
-
-    private fun finishJobDates(graph: Graph): Map<Int, Int> {
-        val finishDates = mutableMapOf<Int, Int>()
-        graph.jobs.forEach {
-            finishDates[it.id] = it.startDate + it.normalDuration
-        }
-        return finishDates
-    }
-
-    private fun readyToStartDate(job: Job, finishJobDates: Map<Int, Int>): Int? {
-        val dependentJobsReadyDates = mutableListOf<Int>()
-        job.dependentJobs.forEach{
-            dependentJobsReadyDates.add(finishJobDates[it] as Int)
-        }
-        return dependentJobsReadyDates.max()
-    }
-
+    fun rating(): RatingDto = RatingDto(
+        rating = jobs.map { it.rating }.average(),
+        criticalJobs = VisualDataDto(jobs.filter { it.gapAfter < 0 || it.gapBefore < 0 }.associateBy { it.id })
+    )
 }
