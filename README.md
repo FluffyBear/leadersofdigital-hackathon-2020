@@ -29,3 +29,9 @@ http://localhost:8080/render.html?analyse&num=3 - визуализация ча�
 http://localhost:8080/swagger-ui.html#/controller/analyseChangeUsingPOST
 
 Примеры формата запросов: https://github.com/FluffyBear/leadersofdigital-hackathon-2020/tree/main/src/main/resources/compare-test
+
+4. Возможность получать подсказки по поводу сдвигов работ способствующих улучшению проекта:
+
+http://localhost:8080/swagger-ui.html#/operations/controller/improveUsingPOST
+
+Можно использовать примеры отсюда: https://github.com/FluffyBear/leadersofdigital-hackathon-2020/tree/main/src/main/resources/analyse-test
