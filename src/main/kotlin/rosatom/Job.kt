@@ -37,7 +37,6 @@ data class Job(
     val gapAfter: Int by lazy { dependentJobs.map { it.startDate }.min()?.let { it - endDate } ?: normalDuration }
 
     val rating: Double by lazy {
-        println("$name > $gapBefore > $gapAfter")
         val gap = gapBefore.sign * max(gapBefore.absoluteValue, normalDuration) / 2.0 +
                 gapAfter.sign * max(gapAfter.absoluteValue, normalDuration) / 2.0
         gap / normalDuration

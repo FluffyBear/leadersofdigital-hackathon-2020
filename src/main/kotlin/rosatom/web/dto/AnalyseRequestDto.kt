@@ -6,6 +6,12 @@ import kotlinx.serialization.json.JsonConfiguration
 import rosatom.Job
 
 @Serializable
+data class CompareRequestDto(
+    val originalProject: AnalyseRequestDto,
+    val adjustedJobs: List<SimplifiedJobDto>
+)
+
+@Serializable
 data class AnalyseRequestDto(
     val jobs: List<SimplifiedJobDto>,
     val dependencies: List<DependencyDto>
