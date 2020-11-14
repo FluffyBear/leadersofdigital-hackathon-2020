@@ -4,22 +4,26 @@ import org.junit.Test
 import rosatom.web.dto.AnalyseRequestDto
 import rosatom.web.dto.DependencyDto
 import rosatom.web.dto.SimplifiedJobDto
+import kotlin.system.measureTimeMillis
 
 class SpeedTest {
 
     @Test
     fun speed100K() {
-         val result = Project(generate(nodeNumbers = 100000)).rating().criticalJobs
+        val test = generate(nodeNumbers = 100000)
+        println(measureTimeMillis{Project(test).rating().criticalJobs})
     }
 
     @Test
     fun speed1M() {
-        val result = Project(generate(nodeNumbers = 1000000)).rating().criticalJobs
+        val test = generate(nodeNumbers = 1000000)
+        println(measureTimeMillis{Project(test).rating().criticalJobs})
     }
 
     @Test
     fun speed10M() {
-        val result = Project(generate(nodeNumbers = 10000000)).rating().criticalJobs
+        val test = generate(nodeNumbers = 10000000)
+        println(measureTimeMillis{Project(test).rating().criticalJobs})
     }
 
     private fun generate(nodeNumbers: Int) : AnalyseRequestDto {
