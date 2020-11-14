@@ -36,7 +36,10 @@ var simulation = d3.forceSimulation()
     .force("charge", d3.forceManyBody())
     .force("center", d3.forceCenter(width / 2, height / 2));
 
-d3.json("render?num="+location.search.split('num=')[1], function(error, graph) {
+var analyse = ""
+if (location.search.split('analyse').length > 1) analyse = "-analyse"
+var testCase = location.search.split('num=')[1]
+d3.json("render"+analyse+"?num="+location.search.split('num=')[1], function(error, graph) {
 
   if (error) throw error;
 
