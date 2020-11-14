@@ -22,4 +22,4 @@ http://localhost:8080/swagger-ui.html#/controller/renderUsingGET
 
 http://localhost:8080/render.html?num=3 - визуализация всего проекта (num - номер проекта из списка тестовых проектов)
 
-http://localhost:8080/render.html?num=3&analyse=true - визуализация частей проектов которые требуют особого внимания
+http://localhost:8080/render.html?analyse&num=3 - визуализация частей проектов которые требуют особого внимания
