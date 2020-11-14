@@ -16,7 +16,7 @@ class TestGeneration {
     @ImplicitReflectionSerializer
     @Test
     fun generate() {
-        File("src/main/resources/test/4.json").writeText(Json(JsonConfiguration.Stable)
+        File("src/main/resources/test/3.json").writeText(Json(JsonConfiguration.Stable)
             .stringify(AnalyseRequestDto(generateJobs(),generateDependencies())))
     }
 
