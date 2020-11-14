@@ -33,13 +33,13 @@ class Controller @Autowired constructor() {
 
     @GetMapping(path = ["/render"])
     fun render(@RequestParam num: String): VisualDataDto {
-        val request = AnalyseRequestDto.parse(Resources.getResource("test/$num.json").readText())
+        val request = AnalyseRequestDto.parse(Resources.getResource("analyse-test/$num.json").readText())
         return VisualDataDto(Project(request).jobs)
     }
 
     @GetMapping(path = ["/render-analyse"])
     fun renderAnalyse(@RequestParam num: String): VisualDataDto {
-        val request = AnalyseRequestDto.parse(Resources.getResource("test/$num.json").readText())
+        val request = AnalyseRequestDto.parse(Resources.getResource("analyse-test/$num.json").readText())
         return Project(request).rating().criticalJobs
     }
 }
