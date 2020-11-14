@@ -14,12 +14,18 @@ leadersofdigital Хакатон 2020
 
 1. Возможность анализировать произвольные проекты:
 
-http://localhost:8080/swagger-ui.html#/controller/renderUsingGET
+http://localhost:8080/swagger-ui.html#/operations/controller/analyseUsingPOST
 
-Примеры формата проектов: https://github.com/FluffyBear/leadersofdigital-hackathon-2020/tree/main/src/main/resources/test
+Примеры формата запросов: https://github.com/FluffyBear/leadersofdigital-hackathon-2020/tree/main/src/main/resources/analyse-test
 
 2. Возможность визуализировать проекты:
 
 http://localhost:8080/render.html?num=3 - визуализация всего проекта (num - номер проекта из списка тестовых проектов)
 
 http://localhost:8080/render.html?analyse&num=3 - визуализация частей проектов которые требуют особого внимания
+
+3. Возможность получать сравнивать оригинальный проект и возможные его изменения:
+
+http://localhost:8080/swagger-ui.html#/controller/analyseChangeUsingPOST
+
+Примеры формата запросов: https://github.com/FluffyBear/leadersofdigital-hackathon-2020/tree/main/src/main/resources/compare-test
