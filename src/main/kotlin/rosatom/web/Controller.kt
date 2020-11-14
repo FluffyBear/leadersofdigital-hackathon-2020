@@ -7,9 +7,7 @@ import org.springframework.boot.autoconfigure.EnableAutoConfiguration
 import org.springframework.web.bind.annotation.*
 import rosatom.Project
 import rosatom.RatingDto
-import rosatom.web.dto.AnalyseRequestDto
-import rosatom.web.dto.CompareRequestDto
-import rosatom.web.dto.VisualDataDto
+import rosatom.web.dto.*
 
 @RestController
 @EnableAutoConfiguration
@@ -29,6 +27,11 @@ class Controller @Autowired constructor() {
         project.adjust(request.adjustedJobs.map { it.toJob() })
         val adjustedRating = project.rating()
         return Pair(originalRating, adjustedRating)
+    }
+
+    @PostMapping(path = ["/improve"])
+    fun improve(@RequestBody request: AnalyseRequestDto): ImproveResponseDto? {
+        return null
     }
 
     @GetMapping(path = ["/render"])
